@@ -8,8 +8,7 @@ from models import storage
 from models.state import State
 
 
-@app_views.route('/states', methods = ['GET'],
-        strict_slashes = False)
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_all_states():
     """ gets list of states """
     all_states = storage.all(State).values()
@@ -19,8 +18,8 @@ def get_all_states():
     return jsonify(list_states)
 
 
-@app_views.route('/states/<string:state_id>', methods = ['GET'],
-        strict_slashes = False)
+@app_views.route('/states/<string:state_id>', methods=['GET'],
+                 strict_slashes=False)
 def get_one_state(state_id):
     """ gets a state based on its id """
     state = storage.get("State", state_id)
@@ -29,8 +28,8 @@ def get_one_state(state_id):
     return jsonify(state.to_dict())
 
 
-@app_views.route('/states/<string:state_id>', methods = ['DELETE'],
-        strict_slashes = False)
+@app_views.route('/states/<string:state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_state(state_id):
     """deletes a state based on its state_id"""
     state = storage.get("State", state_id)
@@ -60,7 +59,7 @@ def put_state(state_id):
     state = storage.get("State", state_id)
     if state is None:
         abort(404)
-    if not request.get_json():
+    if not request.get_json(silent=True):
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     for attr, val in request.get_json().items():
         if attr not in ['id', 'created_at', 'updated_at']:
