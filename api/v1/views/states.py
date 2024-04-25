@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+""" states.py """
+
 
 from api.v1.views import app_views
 from flask import jsonify, abort, make_response, request
