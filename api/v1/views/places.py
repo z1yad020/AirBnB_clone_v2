@@ -51,7 +51,7 @@ def post_place(city_id):
     city = storage.get("City", city_id)
     if city is None:
         abort(404)
-    if not request.get_json():
+    if not request.get_json(silent=True):
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     kwargs = request.get_json()
     if 'user_id' not in kwargs:
@@ -74,7 +74,7 @@ def put_place(place_id):
     place = storage.get("Place", place_id)
     if place is None:
         abort(404)
-    if not request.get_json():
+    if not request.get_json(silent=True):
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     for attr, val in request.get_json().items():
         if attr not in ['id', 'user_id', 'city_id', 'created_at',
