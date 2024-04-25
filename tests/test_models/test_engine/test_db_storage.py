@@ -99,3 +99,25 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(obj, gt_st)
         self.assertTrue(gt_st is gt1_st)
         self.assertFalse(gt1_st is gt2_st)
+
+    def test_count(self):
+        """test count of objects"""
+        all = len(storage.all())
+        stt = len(storage.all(State))
+
+        ts_all = storage.count()
+        ts_stt = storage.count(State)
+
+        self.assertEqual(all, ts_all)
+        self.assertEqual(stt, ts_stt)
+
+        obj = State(name="texas")
+        obj.save()
+
+        self.assertTrue(storage.count() - 1 == ts_all)
+        self.assertTrue(storage.count(State) - 1 == ts_stt)
+
+        storage.delete(obj)
+
+        self.assertTrue(storage.count() == ts_all)
+        self.assertTrue(storage.count(State) == ts_stt)
