@@ -18,6 +18,11 @@ def closing(rand):
     storage.close()
 
 
+@app.errorhandler(404)
+def _handle_api_error(ex):
+    return {"error": "Not found"}, ex.code
+
+
 if __name__ == "__main__":
     host = getenv("HBNB_API_HOST")
     port = getenv("HBNB_API_PORT")
