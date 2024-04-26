@@ -65,8 +65,8 @@ def update_state(state_id):
 
     for key, value in data.items():
         if key not in ("id", "created_at",
-                "updated_at") and obj.__dict__.get(key) is not None:
+                       "updated_at") and obj.__dict__.get(key) is not None:
             setattr(obj, key, value)
 
     obj.save()
-    return obj.to_dict(), 201
+    return obj.to_dict(), 200
