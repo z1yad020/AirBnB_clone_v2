@@ -51,9 +51,11 @@ def amenity_by_id(amenity_id):
         return {}, 200
 
     elif request.method == 'PUT':
-        data = request.get_json()
-        if data is None:
+        try:
+            data = request.get_json()
+        except Exception:
             abort(400, "Not a JSON")
+
         for key, value in data.items():
             if key not in ("id",
                            "created_at",
