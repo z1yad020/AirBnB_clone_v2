@@ -56,8 +56,8 @@ def amenity_by_id(amenity_id):
             abort(400, "Not a JSON")
         for key, value in data.items():
             if key not in ("id",
-                       "created_at",
-                       "updated_at") and am.__dict__.get(key) is not None:
+                           "created_at",
+                           "updated_at") and am.__dict__.get(key) is not None:
                 setattr(am, key, value)
         storage.save()
         return amenity.to_dict(), 200
