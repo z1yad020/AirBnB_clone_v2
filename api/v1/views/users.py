@@ -1,5 +1,8 @@
 #!/usr/bin/python3
+
 """View for Cities"""
+
+
 from api.v1.views import app_views
 from models import storage
 from models.user import User
@@ -16,7 +19,7 @@ def users():
             data = request.get_json()
         except Exception:
             abort(400, "Not a JSON")
-        elif "email" not in data.keys():
+        if "email" not in data.keys():
             abort(400, "Missing email")
         elif "password" not in data.keys():
             abort(400, "Missing password")
