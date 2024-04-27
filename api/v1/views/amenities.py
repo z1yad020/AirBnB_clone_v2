@@ -43,7 +43,7 @@ def amenity_by_id(amenity_id):
         abort(404)
 
     if request.method == 'GET':
-        return amenity.to_dict()
+        return am.to_dict()
 
     elif request.method == 'DELETE':
         storage.delete(am)
@@ -60,4 +60,4 @@ def amenity_by_id(amenity_id):
                            "updated_at") and am.__dict__.get(key) is not None:
                 setattr(am, key, value)
         storage.save()
-        return amenity.to_dict(), 200
+        return am.to_dict(), 200
